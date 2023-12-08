@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>new work allocation</title>
+<link rel="stylesheet" href="CSS/new-wrk.css">
+
+<!--google fonts-->
+
+<!--google fonts-->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+	integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<!--validation code-->
+
+<script>
+	function valForm() {
+		
+		// Get form elements
+		var dateInput = document.addwrk.date;
+		var complaintNoSelect = document.addwrk.complaintno;
+		var linemanSelect = document.addwrk.lineman;
+
+		// Validate Date
+		if (dateInput.value.trim() === "") {
+			alert("Enter Date");
+			dateInput.focus();
+			return false;
+		}
+
+		// Validate Complaint No
+		if (complaintNoSelect.value === "select") {
+			alert("Select Complaint No");
+			complaintNoSelect.focus();
+			return false;
+		}
+
+		// Validate Line Man
+		if (linemanSelect.value === "select") {
+			alert("Select Line Man");
+			linemanSelect.focus();
+			return false;
+		}
+
+		// If all validations pass, submit the form
+		document.addwrk.submit();
+		return true;
+		
+	}
+	// validation code end
+
+	//-----------------------------------get data from database into drop down menu---------------------------------
+	window.onload = function () {
+        console.log("Script is running");
+        
+        var complaintDropdown = document.getElementById("complaintno");
+        var linemanDropdown = document.getElementById("linemanSelect");
+        var xhr = new XMLHttpRequest();
+
+        xhr.open("GET", "addwrk", true);
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    try {
+                        var response = JSON.parse(xhr.responseText);
+
+                        // Check if response has the expected properties
+                        if (response && Array.isArray(response.complaintOptions) && Array.isArray(response.linemanOptions)) {
+                            // Update Complaint Dropdown
+                            complaintDropdown.innerHTML = generateDropdownOptions(response.complaintOptions);
+
+                            // Update Lineman Dropdown
+                            linemanDropdown.innerHTML = generateDropdownOptions(response.linemanOptions);
+
+                            console.log("Complaint Dropdown HTML:", complaintDropdown.innerHTML);
+                            console.log("Lineman Dropdown HTML:", linemanDropdown.innerHTML);
+                        } else {
+                            console.error("Invalid response format:", response);
+                        }
+                    } catch (error) {
+                        console.error("Error parsing JSON:", error);
+                    }
+                } else {
+                    console.error("HTTP request failed with status:", xhr.status);
+                }
+            }
+        };
+
+        xhr.send();
+    };
+
+    function generateDropdownOptions(options) {
+        console.log("Options received:", options);
+
+        // Ensure options is an array
+        if (!Array.isArray(options)) {
+            console.error("Invalid options:", options);
+            return '';  // Return an empty string to prevent further errors
+        }
+
+        // Add a default "select" option
+        return options.map(option => `<option value="${option}">${option}</option>`).join('');
+    }
+
+
+	//-----------------------------------end--------------------------------------------------------------------
+
+</script>
+
+
+</head>
+
+<body>
+	<div class="container" id="container">
+		<nav class="navbar">
+			<!--logo image-->
+			<img class="logo" src="https://kseb.in/frontend/assets/img/logo.png"
+				alt="">
+
+			<!--list-->
+			<ul>
+				<li class="linkeditem"><a class="links" href="#home">Home</a></li>
+				<li class="linkeditem"><a class="links" href="#about">ADD
+						COMPLAINTS</a></li>
+				<li class="linkeditem"><a class="links" href="#skills">WORK
+						ALLOCATION</a></li>
+				<!-- Inside the existing code -->
+				<li class="linkeditem"><a class="links" href="#">REPORTS</a>
+					<ul class="dropdown">
+						<li class="linkeditem"><a class="links" href="#">Action</a></li>
+						<li class="linkeditem"><a class="links" href="#">Another
+								action</a></li>
+						<li class="linkeditem">
+							<hr class="links">
+						</li>
+						<li class="linkeditem"><a class="links" href="#">Something
+								else here</a></li>
+					</ul></li>
+
+				<li class="linkeditem"><a class="links" href="#contact">LOGOUT</a></li>
+			</ul>
+		</nav>
+		<section class="home">
+			<div id="work-form">
+
+
+				<h2>NEW WORK ALLOCATION</h2>
+
+				<form action="addwrk" method="get" name="addwrk">
+					<div>
+						<label>Date</label> <input type="date" name="date"
+							class="text-input">
+					</div>
+
+					<div>
+						<label>Complaint No</label> 
+						<select name="complaintno" id="complaintno">
+							<option value="select" selected>Select</option>
+						</select>
+					</div>
+
+					<div>
+						<label>Line Man</label> 
+						<select name="lineman" id="linemanSelect">
+							<option value="select" selected>Select</option>
+						</select>
+					</div>
+					<button type="submit" onclick="return valForm()">SAVE</button>
+				</form>
+			</div>
+		</section>
+		<br> <br>
+		<!---table design-->
+		<section class="form2">
+
+			<div>
+				<h2>Today's Allocation Details</h2>
+
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">SINO</th>
+							<th scope="col">Allocation No</th>
+							<th scope="col">Date</th>
+							<th scope="col">Complaint No</th>
+							<th scope="col">Line Man</th>
+							<th scope="col">Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th scope="row">1</th>
+							<td>Mark</td>
+							<td>Otto</td>
+							<td>@mdo</td>
+							<td>@mdo</td>
+							<td><a href="edit-work-alloc.html">EDIT</a></td>
+						</tr>
+						<tr>
+							<th scope="row">2</th>
+							<td>Jacob</td>
+							<td>Thornton</td>
+							<td>@fat</td>
+							<td>@mdo</td>
+							<td><a href="edit-work-alloc.html">EDIT</a></td>
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+
+		</section>
+
+		<footer>
+			<p style="text-align: center; font-weight: bold; margin-top: 50px;">&copy;
+				KSEB Design 2023, All Rights Reserved &reg; KSEB</p>
+			<div class="up-arrow">
+				<a href="#container"><i class="fa-solid fa-arrow-up fa-1x"></i></a>
+			</div>
+		</footer>
+	</div>
+</body>
+
+</html>

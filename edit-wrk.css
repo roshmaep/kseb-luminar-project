@@ -1,0 +1,194 @@
+* {
+    /*margin: 0px;*/
+    padding: 0px;
+    font-family: arial, sans-serif;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+    /* viewport height=19.2px */
+    background-color: white;
+    position: relative;
+}
+
+.navbar {
+    display: flex;
+    /* to disply side by side*/
+    justify-content: space-between;
+    margin-left: 100px;
+    align-items: center;
+    width: 85%;
+}
+
+.logo {
+    width: 130px;
+}
+
+.linkeditem {
+    display: inline-block;
+    margin: 10px 20px;
+
+}
+
+.links {
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+}
+
+.links:hover {
+    color: rgb(55, 0, 255);
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.linkeditem:hover .dropdown {
+    display: block;
+}
+
+/* Keep the dropdown visible when hovering over it */
+.dropdown:hover {
+    display: block;
+}
+
+.home {
+    text-align: center;
+    padding: 20px;
+    background-color: #f2f2f2;
+    margin: 20px;
+}
+
+
+h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+
+    color: blue;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: 0 auto;
+
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+label {
+    display: block;
+    font-weight: bolder;
+    margin-bottom: 5px;
+    text-align: left;
+    /* Align labels to the left */
+    width: 100%;
+    /* Make labels take up full width */
+}
+
+input {
+    margin: 5px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    width: 95%;
+}
+
+select {
+    margin: 5px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    width: 100%;
+}
+
+button {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/*table design-----------------------------------------------------------*/
+
+.form2 {
+    text-align: center;
+    padding: 20px;
+    background-color: #f2f2f2;
+    margin: 20px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.table th,
+.table td {
+    border: none;
+    padding: 8px;
+    text-align: center;
+}
+
+.table th {
+    background-color: #f2f2f2;
+}
+
+.table a {
+    text-decoration: none;
+    color: blue;
+}
+
+.table a:hover {
+    color: #0056b3;
+}
+
+/*footer css----------------------------------------*/
+
+.icon,
+.up-arrow {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    /* border: 1px solid;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px 10px;
+    font-size: 30px;
+
+}
+
+.footer {
+    margin: 3rem 0px;
+}
+
+.up-arrow {
+    float: right;
+    background-image: linear-gradient(to bottom right, yellow, #007BFF);
+    margin: 0px 10px 50px 0px;
+}
+
+.up-arrow:hover i {
+    color: white;
+}
